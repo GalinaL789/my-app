@@ -1,5 +1,6 @@
 export interface CounterProps {
-    count: number;
-    onMinus: () => void;
-    onPlus: () => void;
-  }
+  count: number;
+  onMinus: () => void;
+  onPlus: () => void;
+}
+

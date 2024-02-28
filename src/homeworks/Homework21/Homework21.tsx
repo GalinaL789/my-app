@@ -1,6 +1,7 @@
 
 import Feedback from "../../components/Feedback/Feedback";
-import { useState } from "react";
+import Input from "../../components/Input/Input";
+import { useState } from "react"; 
 function Homework21()
 {
     const [likes, setLike] = useState<number>(0);
@@ -30,7 +31,7 @@ function Homework21()
 
   return (
     <div>
-      Homework21: Typescript
+      Homework21: Feedback
       <Feedback likes={likes} dislikes={dislikes} onDislike={onDislike} onLike={onLike} resetResults={resertResults}/>
     </div>
   );

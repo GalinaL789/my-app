@@ -1,8 +1,7 @@
 export interface FeedbackProps {
-    likes: number;
-    dislikes: number;
-    onLike: () => void;
-    onDislike: () => void;
-    resetResults:()=>void;
-  
-  }
+  onDislike: () => void;
+  onLike: () => void;
+  resetResults: () => void;
+  likes: number;
+  dislikes: number;
+}
