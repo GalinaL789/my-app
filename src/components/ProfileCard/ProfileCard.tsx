@@ -1,6 +1,12 @@
 import { ProfileCardProps } from "./types";
 
-import "./styles.css";
+import {
+  ProfileCardContainer,
+  ProfileAvatar,
+  AvatarControl,
+  FirstLastName,
+  ProfileCardInfo,
+} from "./styles";
 
 function ProfileCard({
   profileData,
@@ -12,16 +18,16 @@ function ProfileCard({
   };
 
   return (
-    <div className="profile-card">
+    <ProfileCardContainer>
       {children}
-      <div className="avatar-control">
-        <img className="profile-avatar" alt="Profile Avatar" src={imgSrc} />
-      </div>
-      <h2>{normalizeFirstLastName()}</h2>
-      <p>Career: {profileData.career}</p>
-      <p>Hair Color: {profileData.hairColor}</p>
-      <p>Hobby: {profileData.hobby}</p>
-    </div>
+      <AvatarControl>
+        <ProfileAvatar alt="Profile Avatar" src={imgSrc} />
+      </AvatarControl>
+      <FirstLastName>{normalizeFirstLastName()}</FirstLastName>
+      <ProfileCardInfo>Career: {profileData.career}</ProfileCardInfo>
+      <ProfileCardInfo>Hair Color: {profileData.hairColor}</ProfileCardInfo>
+      <ProfileCardInfo>Hobby: {profileData.hobby}</ProfileCardInfo>
+    </ProfileCardContainer>
   );
 }
 
