@@ -14,9 +14,9 @@ function Homework22()
       {/* <Button onClick={() => console.log("Red button clicked")} disabled>Red Button</Button>
       <Button disabled>Disabled Button</Button> */}
       {/* <Input value="Enabled Input" onChange={(e) => console.log(e.target.value)} /> */}  
-      <Input id="1234" name="XYZ" placeholder ="Disabled Input" label="mylabel" type="text"/>
-      <Input id="456"  name="ABC" placeholder="Disabled Input" label="mylabel" type="text" disabled={true}/>
-     </Homework22Wrapper>
+      {/* <Input id="1234" name="XYZ" placeholder ="Disabled Input" label="mylabel" type="text"/>
+      <Input id="456"  name="ABC" placeholder="Disabled Input" label="mylabel" type="text" disabled={true}/>*/}
+     </Homework22Wrapper> 
   );
 }
 
