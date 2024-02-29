@@ -1,4 +1,3 @@
-import "./App.css"
 function Lesson20() {
   let someString: string="This is string";
   console.log(someString);
