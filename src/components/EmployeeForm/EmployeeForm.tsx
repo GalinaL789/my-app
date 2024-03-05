@@ -1,83 +1,126 @@
-import Input from 'components/Input/Input';
-import './styles.css';
-import { useState, ChangeEvent } from 'react';
-import Button from 'components/Button/Button';
-import { Person } from './types';
-import Card from './Card';
+import { useState, ChangeEvent, SetStateAction, Dispatch } from "react";
+
+import Input from "components/Input/Input";
+import Button from "components/Button/Button";
+
+import { EmployeeInfo } from "./types";
+import {
+  EmployeeFormWrapper,
+  EmployeeFormContainer,
+  EmployeeCard,
+  EmployeeInfoContainer,
+  EmployeeInfoText,
+  EmployeeTitle,
+} from "./styles";
 
 function EmployeeForm() {
-  const [name, setName] = useState<string>('');
-  const [age, setAge] = useState<string>('');
-  //const [showCard, setShowCard] = useState<boolean>(false);
-const showCard=true;
-  const person: Person = {
-    name,
-    age,
+  const [nameValue, setNameValue] = useState<string>("");
+  const [lastNameValue, setLastNameValue] = useState<string>("");
+  const [ageValue, setAgeValue] = useState<string>("");
+  const [jobPositionValue, setJobPositionValue] = useState<string>("");
+  // Создадим state, который решает когда нам карточку показывать, а когда нет
+  const [isShowCard, setIsShowCard] = useState<boolean>(false);
+  // Создаем контейнер(стейт), в котором будет храниться информация для карточки,
+  // чтобы она туда добавлялась только на onClick
+  const [userInfo, setUserInfo] = useState<EmployeeInfo>({
+    name: "",
+    lastName: "",
+    ageValue: "",
+    jobPosition: "",
+  });
+
+  const onChangeFieldsValue = (
+    event: ChangeEvent<HTMLInputElement>,
+    setFieldValue: Dispatch<SetStateAction<string>>
+  ) => {
+    setFieldValue(event.target.value);
   };
 
-  const handleName = (e: ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
+  const createEmployeeCard = () => {
+    // Если все значения у нас не пустые, то показываем карточку
+    if (!!nameValue && !!lastNameValue && !!ageValue && !!jobPositionValue) {
+      setUserInfo({
+        name: nameValue,
+        lastName: lastNameValue,
+        ageValue: ageValue,
+        jobPosition: jobPositionValue,
+      });
+      setIsShowCard(true);
+    } else {
+      // Показываем alert если хотя бы одно из полей пустое
+      setIsShowCard(false);
+      setTimeout(() => alert("Введите данные во все поля"), 0);
+    }
   };
-
-  const handleAge = (e: ChangeEvent<HTMLInputElement>) => {
-    setAge(e.target.value);
-  };
-
-  const handleShowCard = () => {
-    console.log("hi");
-  //   e.preventDefault();
-  //   if (name !== '' && age !== '') {
-  //     setShowCard(true);
-  //  } else {
-  //     alert('Заполните поля');
-  //   }
-   };
 
   return (
-    <div className="white_box_container">
-      <form action="">
-        <div className="white_box_content_container">
-          <div className="white_box_content_fields">
-            <div className="white_box_content_fields_inputs">
-              <div className="white_box_content_fields_inputs_label"></div>
-              <div className="white_box_content_fields_inputs_frame">
-                <Input
-                  id={'name'}
-                  disabled={false}
-                  name={'name'}
-                  placeholder={'введите свое имя'}
-                  label={'имя'}
-                  type={'text'}
-                  value={name}
-                  onChange={handleName}
-                />
-              </div>
-            </div>
-            <div className="white_box_content_fields_inputs">
-              <div className="white_box_content_fields_inputs_label"></div>
-              <div className="white_box_content_fields_inputs_frame">
-                <Input
-                  id={'age'}
-                  disabled={false}
-                  name={'age'}
-                  placeholder={'введите свой возраст'}
-                  label={'возраст'}
-                  type={'text'}
-                  value={age}
-                  onChange={handleAge}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="button_submit">
-            {/* <Button name={'создать'} type={'submit'} onClick={handleShowCard} /> */}
-            <Button name={'создать'} type={'submit'}/>
-          </div>
-        </div>
-      </form>
-      {/* {showCard ? <Card profileData={person} /> : null} */}
-      {showCard ? <Card name={'Ivan'} age={'45'}/> : null} 
-    </div>
+    <EmployeeFormWrapper>
+      <EmployeeFormContainer>
+        <Input
+          id="first_name_id"
+          name="firstName"
+          onChange={(event: ChangeEvent<HTMLInputElement>) =>
+            onChangeFieldsValue(event, setNameValue)
+          }
+          value={nameValue}
+          label="Имя"
+          placeholder="Иван"
+        />
+        <Input
+          id="last_name_id"
+          name="lastName"
+          onChange={(event: ChangeEvent<HTMLInputElement>) =>
+            onChangeFieldsValue(event, setLastNameValue)
+          }
+          value={lastNameValue}
+          label="Фамилия"
+          placeholder="Василевский"
+        />
+        <Input
+          id="age_id"
+          name="age"
+          onChange={(event: ChangeEvent<HTMLInputElement>) =>
+            onChangeFieldsValue(event, setAgeValue)
+          }
+          value={ageValue}
+          label="Возраст"
+          placeholder="25"
+        />
+        <Input
+          id="job_position_id"
+          name="job_position"
+          onChange={(event: ChangeEvent<HTMLInputElement>) =>
+            onChangeFieldsValue(event, setJobPositionValue)
+          }
+          value={jobPositionValue}
+          label="Должность"
+          placeholder="Старший специалист"
+        />
+        <Button name="Создать" onClick={createEmployeeCard} />
+      </EmployeeFormContainer>
+      {/* Если в левой части от && у вас false, то правая часть(JSX элементы) не показываются, 
+      если же левая часть от && true, то правая часть(JSX элементы) отображается */}
+      {isShowCard && (
+        <EmployeeCard>
+          <EmployeeInfoContainer>
+            <EmployeeTitle>Имя</EmployeeTitle>
+            <EmployeeInfoText>{userInfo.name}</EmployeeInfoText>
+          </EmployeeInfoContainer>
+          <EmployeeInfoContainer>
+            <EmployeeTitle>Фамилия</EmployeeTitle>
+            <EmployeeInfoText>{userInfo.lastName}</EmployeeInfoText>
+          </EmployeeInfoContainer>
+          <EmployeeInfoContainer>
+            <EmployeeTitle>Возраст</EmployeeTitle>
+            <EmployeeInfoText>{userInfo.ageValue}</EmployeeInfoText>
+          </EmployeeInfoContainer>
+          <EmployeeInfoContainer>
+            <EmployeeTitle>Должность</EmployeeTitle>
+            <EmployeeInfoText>{userInfo.jobPosition}</EmployeeInfoText>
+          </EmployeeInfoContainer>
+        </EmployeeCard>
+      )}
+    </EmployeeFormWrapper>
   );
 }
 

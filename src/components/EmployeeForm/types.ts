@@ -1,4 +1,6 @@
-export interface Person {
-    name: string;
-    age: string;
-  }
+export interface EmployeeInfo {
+  name: string;
+  lastName: string;
+  ageValue: string;
+  jobPosition: string;
+}

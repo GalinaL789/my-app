@@ -1,11 +1,12 @@
 import EmployeeForm from "components/EmployeeForm/EmployeeForm";
 
+import { Homework23Wrapper } from "./styles";
 
 function Homework23() {
   return (
-    <div>
+    <Homework23Wrapper>
       <EmployeeForm />
-    </div>
+    </Homework23Wrapper>
   );
 }
 
