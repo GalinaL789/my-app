@@ -5,11 +5,13 @@ function Input({
   id,
   disabled = false,
   name,
+  age,
   placeholder,
   label,
   type = "text",
   value,
   onChange,
+  checked=false,
 }: InputProps) {
   return (
     <InputContainer>
@@ -22,6 +24,7 @@ function Input({
         disabled={disabled}
         placeholder={placeholder}
         type={type}
+        checked={checked}
       />
     </InputContainer>
   );
