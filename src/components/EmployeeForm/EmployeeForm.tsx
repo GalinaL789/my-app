@@ -34,10 +34,10 @@ function EmployeeForm() {
     lastName: Yup.string()
       .required("Обязательное поле")
       .max(15, "Максимальное количество символов - 15"),
-    age: Yup.string()
+    age: Yup.number()
       .required("Обязательное поле")
-      .min(1, "Минимальное количество символов - 1")
-      .max(3, "Максимальное количество символов - 3"),
+      .min(1, "Минимальный возраст - 1")
+      .max(99, "Максимальный возраст - 99"),
     jobPosition: Yup.string().max(30, "Максимальное количество символов - 30"),
     agreement: Yup.boolean().oneOf([true], 'Необходимо согласиться с правилами использования').required('Необходимо согласиться с правилами использования'),
   });
@@ -95,7 +95,7 @@ function EmployeeForm() {
           placeholder="Введите Ваш возраст"
         />
         {formik.errors.age ? (
-          <div>{formik.errors.age}</div>
+          <EmployeeErrorMessage>{formik.errors.age}</EmployeeErrorMessage>
         ) : null}
         <Input
           id="jobPosition"

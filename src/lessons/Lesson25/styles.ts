@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import { colors } from "styles/colors";
+import { colors } from "styles.ts/colors";
 
 export const Lesson25Wrapper = styled.div`
   display: flex;
